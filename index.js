@@ -8,28 +8,15 @@ const user = require('./src/router/user');
 const port = 8088
 const server = express()
 
-
+server.use(express.json());
+server.use(express.urlencoded({extended: true}));
 server.use('/analyse', analyse)
 server.use('/device', device)
 server.use('/user', user)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-server.get('/hello', (req, res) => {
+server.post('/test', (req, res) => {
+  console.log(req.body)
   res.status(200).send("hello world")
 })
 server.get('/api/test', (req, res) => {
