@@ -12,7 +12,8 @@ User.post('/register', (req,rsp) => {
     email,
     password
   } = req.body
-  if(name && phone && email && password){
+  console.log(decode(password))
+  if(name && phone && password){
     // insert to database
     rsp.status(200).send({
       code: 0,
@@ -21,19 +22,29 @@ User.post('/register', (req,rsp) => {
       data: {}
     })
   }
+  else{
+    rsp.status(400).send({
+      code: 1,
+      msg: '参数错误',
+      desc: '',
+      data: {}
+    })
+  }
 })
 User.post('/login', (req,rsp) => {
   const {phone, password} = req.body
-  console.log(password, decode(password))
-
   if(phone && password){
+    const token = Mock.mock('@guid')
+    let pwdDecode = decode(password);
+    console.log(pwdDecode)
     // 数据库查询站户信息
     rsp.status(200).send({
       code: 0,
       msg: '登录成功',
       desc: '请求成功',
       data: {
-        token: Mock.mock('@guid')
+        phone,
+        token
       }
     })
   }
