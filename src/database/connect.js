@@ -1,5 +1,9 @@
 const DATABASE = require('mongoose');
-const URL = "mongodb://sdp:000000@120.78.210.9/node_test";
+const username = '';
+const password = '';
+const ip = '';
+const path = '';
+const URL = `mongodb://${username}:${password}@${ip}/${path}`;
 DATABASE.connect(URL, {
   authSource: 'admin'
 })
